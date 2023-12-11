@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -10,15 +11,9 @@ public class ScoreManager : MonoBehaviour
     public int clickPower;
     public TextMeshProUGUI uiScore;
 
-
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-
-    }
+    public int costUpgrade;
+    public TextMeshProUGUI uiCostUpgrade;
+    public TextMeshProUGUI uiClickPower;
 
     //Click Object
     public void updateScore(int amount)
@@ -26,6 +21,24 @@ public class ScoreManager : MonoBehaviour
         //Update Score
         uiScore.text = score.ToString("0000");
         score += amount;
+    }
+
+    public void ClickButton()
+    {
+        updateScore(clickPower);
+    }
+
+    public void upgradeClickPower()
+    {
+        if (score >= costUpgrade)
+        {
+            updateScore(-costUpgrade);
+            costUpgrade += costUpgrade + (costUpgrade/2);
+            clickPower += 1;
+
+            uiCostUpgrade.text = costUpgrade.ToString("0000");
+            uiClickPower.text = clickPower.ToString("0000");
+        }
     }
 
     public int GetScore()

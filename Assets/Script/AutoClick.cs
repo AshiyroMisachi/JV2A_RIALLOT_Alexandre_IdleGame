@@ -16,7 +16,7 @@ public class AutoClick : MonoBehaviour
     void Start()
     {
         scoreManager = FindObjectOfType<ScoreManager>();
-        StartCoroutine(autoClick());
+        StartCoroutine(WhileAutoClick());
     }
 
     public void upgradeClickPower()
@@ -24,7 +24,7 @@ public class AutoClick : MonoBehaviour
         if (scoreManager.GetScore() >= costUpgrade)
         {
             scoreManager.updateScore(-costUpgrade);
-            costUpgrade += 10;
+            costUpgrade += costUpgrade/2;
             clickPower += 1;
 
             costUpgrade_Text.text = costUpgrade.ToString("0000");
@@ -32,7 +32,7 @@ public class AutoClick : MonoBehaviour
         }
     }
 
-    public IEnumerator autoClick()
+    public IEnumerator WhileAutoClick()
     {
         while (true)
         {
