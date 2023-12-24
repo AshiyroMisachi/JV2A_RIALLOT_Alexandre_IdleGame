@@ -1,48 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
-    //Var
-    private int score;
-    public int clickPower;
-    public TextMeshProUGUI uiScore;
+    //Private VAR
+    [SerializeField]
+    private float score, scorePower = 1;
 
-    public int costUpgrade;
-    public TextMeshProUGUI uiCostUpgrade;
-    public TextMeshProUGUI uiClickPower;
+    //UI Reference
+    public TextMeshProUGUI showScore;
 
-    //Click Object
-    public void updateScore(int amount)
-    {
-        //Update Score
-        uiScore.text = score.ToString("0000");
-        score += amount;
-    }
-
-    public void ClickButton()
-    {
-        updateScore(clickPower);
-    }
-
-    public void upgradeClickPower()
-    {
-        if (score >= costUpgrade)
-        {
-            updateScore(-costUpgrade);
-            costUpgrade += costUpgrade + (costUpgrade/2);
-            clickPower += 1;
-
-            uiCostUpgrade.text = costUpgrade.ToString("0000");
-            uiClickPower.text = clickPower.ToString("0000");
-        }
-    }
-
-    public int GetScore()
+    public float GetScore()
     {
         return score;
+    }
+
+    public float GetScorePower()
+    {
+        return scorePower;
+    }
+
+    public void UpdateScore(float ammout)
+    {
+        score += ammout;
+        showScore.text = Math.Floor(score).ToString("000000");
     }
 }
