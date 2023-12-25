@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
     //Private VAR
     [SerializeField]
-    private float score, scorePower = 1;
-    private int ballNumber = 5;
+    private float score;
+    private int ballNumber = 1;
 
     //Level VAR
     [SerializeField]
@@ -29,8 +30,8 @@ public class ScoreManager : MonoBehaviour
     public Array[] allLevel;
 
     //Shop Cost
-    private float upgradeCostLevel = 50;
-    public TextMeshProUGUI upgradeCostLevelText;
+    private float powerClick = 1, upgradePowerClick = 560, upgradeCostLevel = 50;
+    public TextMeshProUGUI powerCostText, upgradeCostLevelText;
 
     //UI Reference
     public TextMeshProUGUI showScore;
@@ -60,7 +61,7 @@ public class ScoreManager : MonoBehaviour
 
     public float GetScorePower()
     {
-        return scorePower;
+        return powerClick;
     }
 
     public int GetBallNumber()
@@ -98,8 +99,8 @@ public class ScoreManager : MonoBehaviour
         {
             currentLevel++;
             UpdateScore(-upgradeCostLevel);
-            upgradeCostLevel *= 2;
-            upgradeCostLevelText.text = "Cost: " + upgradeCostLevel;
+            upgradeCostLevel *= 2.2f;
+            upgradeCostLevelText.text = "Cost: " + Math.Floor(upgradeCostLevel);
             int[] currentChance = (int[])allLevel[currentLevel - 1];
             showCommon.text = (0 + currentChance[0]) + "%";
             if (currentChance[1] > 0)
@@ -110,6 +111,17 @@ public class ScoreManager : MonoBehaviour
                 showEpic.text = (currentChance[3] - currentChance[2]) + "%";
             if (currentChance[3] < 100 && currentChance[3] > 0)
                 showLegendary.text = (100 - currentChance[3]) + "%";
+        }
+    }
+
+    public void UpgradePower()
+    {
+        if (GetScore() >= upgradePowerClick)
+        {
+            UpdateScore(-upgradePowerClick);
+            upgradePowerClick *= 4.8f;
+            powerCostText.text = "Cost: " + Math.Floor(upgradePowerClick);
+            powerClick++;
         }
     }
 }
