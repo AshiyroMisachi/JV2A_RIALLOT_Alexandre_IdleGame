@@ -14,8 +14,8 @@ public class ScoreManager : MonoBehaviour
     private int ballNumber = 1;
 
     //Level VAR
-    [SerializeField]
     public TextMeshProUGUI showCommon, showUncommon, showRare, showEpic, showLegendary;
+    [SerializeField]
     private int currentLevel = 1;
     public int[] level1;
     public int[] level2;
@@ -100,7 +100,7 @@ public class ScoreManager : MonoBehaviour
         {
             currentLevel++;
             UpdateScore(-upgradeCostLevel);
-            upgradeCostLevel *= 1.9f;
+            upgradeCostLevel *= 1.6f;
             if (currentLevel == 11)
             {
                 upgradeCostLevelText.text = "Maxed";
@@ -127,7 +127,7 @@ public class ScoreManager : MonoBehaviour
         if (GetScore() >= upgradePowerClick)
         {
             UpdateScore(-upgradePowerClick);
-            upgradePowerClick *= 3.6f;
+            upgradePowerClick *= 2.5f;
             powerCostText.text = Math.Floor(upgradePowerClick).ToString();
             ballNumber++;
         }
