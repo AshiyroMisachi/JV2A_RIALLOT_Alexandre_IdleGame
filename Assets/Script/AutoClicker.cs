@@ -42,8 +42,8 @@ public class AutoClicker : MonoBehaviour
         if (scoreManager.GetScore() >= upgradePowerClick)
         {
             scoreManager.UpdateScore(-upgradePowerClick);
-            upgradePowerClick *= 1.9f;
-            powerCostText.text = "Cost: " + Math.Floor(upgradePowerClick);
+            upgradePowerClick *= 1.2f;
+            powerCostText.text = Math.Floor(upgradePowerClick).ToString();
             powerClick++;
             UpdateEmission();
         }

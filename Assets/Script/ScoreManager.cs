@@ -10,6 +10,7 @@ public class ScoreManager : MonoBehaviour
     //Private VAR
     [SerializeField]
     private float score;
+    [SerializeField]
     private int ballNumber = 1;
 
     //Level VAR
@@ -99,8 +100,15 @@ public class ScoreManager : MonoBehaviour
         {
             currentLevel++;
             UpdateScore(-upgradeCostLevel);
-            upgradeCostLevel *= 2.2f;
-            upgradeCostLevelText.text = "Cost: " + Math.Floor(upgradeCostLevel);
+            upgradeCostLevel *= 1.9f;
+            if (currentLevel == 11)
+            {
+                upgradeCostLevelText.text = "Maxed";
+            }
+            else
+            {
+                upgradeCostLevelText.text = Math.Floor(upgradeCostLevel).ToString();
+            }
             int[] currentChance = (int[])allLevel[currentLevel - 1];
             showCommon.text = (0 + currentChance[0]) + "%";
             if (currentChance[1] > 0)
@@ -119,9 +127,9 @@ public class ScoreManager : MonoBehaviour
         if (GetScore() >= upgradePowerClick)
         {
             UpdateScore(-upgradePowerClick);
-            upgradePowerClick *= 4.8f;
-            powerCostText.text = "Cost: " + Math.Floor(upgradePowerClick);
-            powerClick++;
+            upgradePowerClick *= 3.6f;
+            powerCostText.text = Math.Floor(upgradePowerClick).ToString();
+            ballNumber++;
         }
     }
 }

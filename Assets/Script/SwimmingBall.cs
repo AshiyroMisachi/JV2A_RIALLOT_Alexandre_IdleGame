@@ -20,7 +20,8 @@ public class SwimmingBall : MonoBehaviour
         myAnimator.SetTrigger("OnClick");
         for (int i = 0; i < scoreManager.GetBallNumber(); i++)
         {
-            GameObject newBall = Instantiate(ballPrefab, ballShelf.transform.position, Quaternion.identity);
+            //GameObject newBall = Instantiate(ballPrefab, ballShelf.transform.position, Quaternion.identity);
+            GameObject newBall = Instantiate(ballPrefab, new Vector3(Random.Range(-4.283f, 4.283f),2, Random.Range(0.5f, 3.8f)), Quaternion.identity);
             newBall.transform.SetParent(allBall.transform, true);
             int X = Random.Range(1, 101);
             int[] currentRarity = (int[])scoreManager.allLevel[scoreManager.GetCurrentLevel()-1];
