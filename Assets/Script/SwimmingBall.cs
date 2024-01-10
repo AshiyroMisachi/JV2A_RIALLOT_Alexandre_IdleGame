@@ -17,7 +17,7 @@ public class SwimmingBall : MonoBehaviour
 
     public void OnMouseDown()
     {
-        myAnimator.SetTrigger("OnClick");
+        //myAnimator.SetTrigger("OnClick");
         for (int i = 0; i < scoreManager.GetBallNumber(); i++)
         {
             //GameObject newBall = Instantiate(ballPrefab, ballShelf.transform.position, Quaternion.identity);

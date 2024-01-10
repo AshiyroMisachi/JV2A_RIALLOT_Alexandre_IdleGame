@@ -148,6 +148,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myRenderer: {fileID: 0}
   myRarity: 0
+  rarityMaterial:
+  - {fileID: 2100000, guid: 66cfe89aa8eb86c48bd005d542154975, type: 2}
+  - {fileID: 2100000, guid: 4a9ea0be61dca624b9a0fdee3b1a1344, type: 2}
+  - {fileID: 2100000, guid: bb36e6244721ab847a1761b256370194, type: 2}
+  - {fileID: 2100000, guid: f9dcf83fdd2002146b8ba31d763cd5f7, type: 2}
+  - {fileID: 2100000, guid: 0c3f3af0582a9ec4da5e3407ef85e079, type: 2}
   rarityVFX:
   - {fileID: 5609580142422754197, guid: a4e1915221e946c4c80268e181fa4b7e, type: 3}
   - {fileID: 5609580142422754197, guid: 956e86aa91e4c0e408e5209a6309b597, type: 3}
