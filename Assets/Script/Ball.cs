@@ -18,13 +18,10 @@ public class Ball : MonoBehaviour
         myRenderer.material.color = new Color(myRenderer.material.color.r + Random.Range(-colorSample, colorSample), myRenderer.material.color.g + Random.Range(-colorSample, colorSample), myRenderer.material.color.b + Random.Range(-colorSample, colorSample));
         Instantiate(rarityVFX[(int)myRarity], transform);
     }
-    void Update()
+
+    public void OnDestroy()
     {
-        timer += Time.deltaTime;
-        if (timer > 10)
-        {
-            Destroy(gameObject);
-            Instantiate(destroyVFX[(int)myRarity], transform.position, Quaternion.identity);
-        }
+        Instantiate(destroyVFX[(int)myRarity], transform.position, Quaternion.identity);
     }
+
 }
