@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Basic_Pool
   m_EditorClassIdentifier: 
   ballNeeded: 200
+  scoreDrop: 40
   mesh: {fileID: 2297425034801156755, guid: 6d195039259ad7245912b6fe9f45d174, type: 3}
   ballSpawn:
   - 4

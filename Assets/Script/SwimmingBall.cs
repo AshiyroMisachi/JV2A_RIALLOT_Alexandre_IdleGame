@@ -13,11 +13,11 @@ public class SwimmingBall : MonoBehaviour
     //Var
     public SciptablePool[] sciptablePools;
     [SerializeField]
-    private int ballNeeded, ballNumber;
+    private int ballNeeded, ballNumber, scoreDrop;
     private float[] ballSpawn;
     public TextMeshProUGUI ballCount;
 
-    [Header("Cheat")]
+    [Header("Debug")]
     public bool autoSpawn;
 
 
@@ -27,7 +27,7 @@ public class SwimmingBall : MonoBehaviour
         scoreManager = FindObjectOfType<ScoreManager>();
         AttributeNewValue();
 
-        //Cheat Code
+        //Bebug Code
         StartCoroutine(CheatCode());
     }
 
@@ -36,6 +36,7 @@ public class SwimmingBall : MonoBehaviour
         var randomNumber = Random.Range(0, sciptablePools.Length);
         ballNeeded = sciptablePools[randomNumber].ballNeeded;
         ballSpawn = sciptablePools[randomNumber].ballSpawn;
+        scoreDrop = sciptablePools[randomNumber].scoreDrop;
         gameObject.GetComponent<MeshFilter>().mesh = sciptablePools[randomNumber].mesh;
         gameObject.GetComponent<MeshCollider>().sharedMesh = sciptablePools[randomNumber].mesh;
         ballCount.text = ballNumber.ToString() + "/" + ballNeeded.ToString();
@@ -81,14 +82,14 @@ public class SwimmingBall : MonoBehaviour
                 scoreManager.UpdateScore(scoreManager.GetScorePower() * 5);
             }
             ballNumber++;
-            ballCount.text = ballNumber.ToString() + "/" + ballNeeded.ToString();
-            if (ballNumber >= ballNeeded)
-            {
-                gameObject.GetComponent<MeshRenderer>().enabled = false;
-                gameObject.GetComponent<MeshCollider>().enabled = false;
-                ballNumber = 0;
-                StartCoroutine(GenerateNewPool());
-            }
+        }
+        ballCount.text = ballNumber.ToString() + "/" + ballNeeded.ToString();
+        if (ballNumber >= ballNeeded)
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<MeshCollider>().enabled = false;
+            ballNumber = 0;
+            StartCoroutine(GenerateNewPool());
         }
     }
 
@@ -99,11 +100,14 @@ public class SwimmingBall : MonoBehaviour
         {
             Destroy(allBall.transform.GetChild(i).gameObject);
         }
-
+        scoreManager.UpdateScore(scoreDrop);
         //Generate New Pool
         gameObject.GetComponent<MeshRenderer>().enabled = true;
         gameObject.GetComponent<MeshCollider>().enabled = true;
         AttributeNewValue();
+
+        //Open acces to Meal
+        scoreManager.buttonGoToMeal.SetActive(true);
     }
 
     public IEnumerator CheatCode()

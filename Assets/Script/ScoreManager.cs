@@ -7,12 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
-    //Private VAR
-    [SerializeField]
-    private float score;
-    [SerializeField]
-    private int ballNumber = 1;
-
     //Level VAR
     public TextMeshProUGUI showCommon, showUncommon, showRare, showEpic, showLegendary;
     [SerializeField]
@@ -30,13 +24,20 @@ public class ScoreManager : MonoBehaviour
     public int[] level11;
     public Array[] allLevel;
 
-    //Shop Cost
+    //Camera
+    public Camera cameraPool, cameraMeal;
+
+    //Swimming Pool
+    [SerializeField]
+    private float scoreBall;
+    [SerializeField]
+    private int ballNumber = 1;
     private float powerClick = 1, upgradePowerClick = 560, upgradeCostLevel = 50;
     public TextMeshProUGUI powerCostText, upgradeCostLevelText;
 
     //UI Reference
     public TextMeshProUGUI showScore;
-    public GameObject shopHolder;
+    public GameObject shopHolder, buttonGoToMeal;
 
     private void Start()
     {
@@ -53,11 +54,14 @@ public class ScoreManager : MonoBehaviour
         allLevel[8] = level9;
         allLevel[9] = level10;
         allLevel[10] = level11;
+
+        buttonGoToMeal.SetActive(false);
+        cameraMeal.enabled = false;
     }
 
     public float GetScore()
     {
-        return score;
+        return scoreBall;
     }
 
     public float GetScorePower()
@@ -77,12 +81,12 @@ public class ScoreManager : MonoBehaviour
 
     public void UpdateScore(float ammout)
     {
-        score += ammout;
-        showScore.text = Math.Floor(score).ToString("000000");
+        scoreBall += ammout;
+        showScore.text = Math.Floor(scoreBall).ToString("000000");
     }
 
-    //SHOP
-    public void OpenShop()
+    //SHOP POOL
+    public void OpenShopPool()
     {
         if (shopHolder.activeSelf)
         {
@@ -94,9 +98,9 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void UpgradeLevel()
+    public void UpgradeLevelPool()
     {
-        if (currentLevel < 11 && score >= upgradeCostLevel)
+        if (currentLevel < 11 && scoreBall >= upgradeCostLevel)
         {
             currentLevel++;
             UpdateScore(-upgradeCostLevel);
@@ -122,7 +126,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void UpgradePower()
+    public void UpgradePowerPool()
     {
         if (GetScore() >= upgradePowerClick)
         {
@@ -131,5 +135,11 @@ public class ScoreManager : MonoBehaviour
             powerCostText.text = Math.Floor(upgradePowerClick).ToString();
             ballNumber++;
         }
+    }
+
+    public void ChangeMode()
+    {
+        cameraPool.enabled = !cameraPool.enabled;
+        cameraMeal.enabled = !cameraMeal.enabled;
     }
 }
