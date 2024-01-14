@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRenderer: {fileID: 0}
-  myRarity: 0
+  myRarity: 5
   rarityMaterial:
   - {fileID: 2100000, guid: 66cfe89aa8eb86c48bd005d542154975, type: 2}
   - {fileID: 2100000, guid: 4a9ea0be61dca624b9a0fdee3b1a1344, type: 2}

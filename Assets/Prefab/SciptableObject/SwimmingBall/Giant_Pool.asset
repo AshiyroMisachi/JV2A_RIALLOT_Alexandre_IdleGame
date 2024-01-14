@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69a9a8106a5b6aa43a62e85fd1d2f4d1, type: 3}
-  m_Name: Basic_Pool
+  m_Name: Giant_Pool
   m_EditorClassIdentifier: 
-  myPos: {x: 0, y: 0.42480567, z: 0}
-  myScale: {x: 10, y: 10, z: 10}
-  cameraPos: {x: 0, y: 15.65, z: -11.83}
-  ballNeeded: 200
-  scoreDrop: 40
-  mesh: {fileID: 2297425034801156755, guid: 6d195039259ad7245912b6fe9f45d174, type: 3}
+  myPos: {x: 310.66, y: -171.51, z: 317.54}
+  myScale: {x: 2, y: 2, z: 2}
+  cameraPos: {x: 0, y: 30.7, z: -41.7}
+  ballNeeded: 2000
+  scoreDrop: 500
+  mesh: {fileID: -7178732445926849239, guid: e6b8047bb832adb4da491db445c8cfc6, type: 3}
   ballSpawn:
-  - 4
+  - 20
   - 10
-  - 4
+  - 10

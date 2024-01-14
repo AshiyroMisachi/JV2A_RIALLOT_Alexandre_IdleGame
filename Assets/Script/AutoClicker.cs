@@ -32,7 +32,7 @@ public class AutoClicker : MonoBehaviour
     {
         while (true)
         {
-            scoreManager.UpdateScore(powerClick);
+            scoreManager.UpdateScorePool(powerClick);
             yield return new WaitForSeconds(timerBetweenClick);
         }
     }
@@ -41,7 +41,7 @@ public class AutoClicker : MonoBehaviour
     {
         if (scoreManager.GetScore() >= upgradePowerClick)
         {
-            scoreManager.UpdateScore(-upgradePowerClick);
+            scoreManager.UpdateScorePool(-upgradePowerClick);
             upgradePowerClick *= 1.2f;
             powerCostText.text = Math.Floor(upgradePowerClick).ToString();
             powerClick++;

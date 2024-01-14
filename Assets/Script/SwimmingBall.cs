@@ -25,20 +25,22 @@ public class SwimmingBall : MonoBehaviour
     {
         //Find Reference
         scoreManager = FindObjectOfType<ScoreManager>();
-        AttributeNewValue();
+        AttributeNewValue(0);
 
         //Bebug Code
-        StartCoroutine(CheatCode());
+        StartCoroutine(DebugMode());
     }
 
-    public void AttributeNewValue()
+    public void AttributeNewValue(int value)
     {
-        var randomNumber = Random.Range(0, sciptablePools.Length);
-        ballNeeded = sciptablePools[randomNumber].ballNeeded;
-        ballSpawn = sciptablePools[randomNumber].ballSpawn;
-        scoreDrop = sciptablePools[randomNumber].scoreDrop;
-        gameObject.GetComponent<MeshFilter>().mesh = sciptablePools[randomNumber].mesh;
-        gameObject.GetComponent<MeshCollider>().sharedMesh = sciptablePools[randomNumber].mesh;
+        transform.parent.transform.localScale = sciptablePools[value].myScale;
+        transform.localPosition = sciptablePools[value].myPos;
+        scoreManager.cameraPool.transform.position = sciptablePools[value].cameraPos;
+        ballNeeded = sciptablePools[value].ballNeeded;
+        ballSpawn = sciptablePools[value].ballSpawn;
+        scoreDrop = sciptablePools[value].scoreDrop;
+        gameObject.GetComponent<MeshFilter>().mesh = sciptablePools[value].mesh;
+        gameObject.GetComponent<MeshCollider>().sharedMesh = sciptablePools[value].mesh;
         ballCount.text = ballNumber.ToString() + "/" + ballNeeded.ToString();
     }
 
@@ -51,7 +53,7 @@ public class SwimmingBall : MonoBehaviour
         //myAnimator.SetTrigger("OnClick");
         for (int i = 0; i < scoreManager.GetBallNumber(); i++)
         {
-            Vector3 ballPosSpawn = new Vector3(transform.localPosition.x + Random.Range(-ballSpawn[0], ballSpawn[0]), ballSpawn[1], transform.localPosition.z + Random.Range(-ballSpawn[2], ballSpawn[2]));
+            Vector3 ballPosSpawn = new Vector3(Random.Range(-ballSpawn[0], ballSpawn[0]), ballSpawn[1], Random.Range(-ballSpawn[2], ballSpawn[2]));
             GameObject newBall = Instantiate(ballPrefab, ballPosSpawn, Quaternion.identity);
             newBall.transform.SetParent(allBall.transform, true);
             int X = Random.Range(1, 101);
@@ -59,27 +61,27 @@ public class SwimmingBall : MonoBehaviour
             if (X <= currentRarity[0])
             {
                 newBall.gameObject.GetComponent<Ball>().myRarity = 0;
-                scoreManager.UpdateScore(scoreManager.GetScorePower());
+                scoreManager.UpdateScorePool(scoreManager.GetScorePower());
             }
             else if (X <= currentRarity[1])
             {
                 newBall.gameObject.GetComponent<Ball>().myRarity = (BallRarity)1;
-                scoreManager.UpdateScore(scoreManager.GetScorePower() * 2);
+                scoreManager.UpdateScorePool(scoreManager.GetScorePower() * 2);
             }
             else if (X <= currentRarity[2])
             {
                 newBall.gameObject.GetComponent<Ball>().myRarity = (BallRarity)2;
-                scoreManager.UpdateScore(scoreManager.GetScorePower() * 3);
+                scoreManager.UpdateScorePool(scoreManager.GetScorePower() * 3);
             }
             else if (X <= currentRarity[3])
             {
                 newBall.gameObject.GetComponent<Ball>().myRarity = (BallRarity)3;
-                scoreManager.UpdateScore(scoreManager.GetScorePower() * 4);
+                scoreManager.UpdateScorePool(scoreManager.GetScorePower() * 4);
             }
             else
             {
                 newBall.gameObject.GetComponent<Ball>().myRarity = (BallRarity)4;
-                scoreManager.UpdateScore(scoreManager.GetScorePower() * 5);
+                scoreManager.UpdateScorePool(scoreManager.GetScorePower() * 5);
             }
             ballNumber++;
         }
@@ -100,17 +102,17 @@ public class SwimmingBall : MonoBehaviour
         {
             Destroy(allBall.transform.GetChild(i).gameObject);
         }
-        scoreManager.UpdateScore(scoreDrop);
+        scoreManager.UpdateScorePool(scoreDrop);
         //Generate New Pool
         gameObject.GetComponent<MeshRenderer>().enabled = true;
         gameObject.GetComponent<MeshCollider>().enabled = true;
-        AttributeNewValue();
+        AttributeNewValue(Random.Range(0, sciptablePools.Length));
 
         //Open acces to Meal
-        scoreManager.buttonGoToMeal.SetActive(true);
+        scoreManager.buttonGoTo.SetActive(true);
     }
 
-    public IEnumerator CheatCode()
+    public IEnumerator DebugMode()
     {
         yield return new WaitForEndOfFrame();
         while (true)

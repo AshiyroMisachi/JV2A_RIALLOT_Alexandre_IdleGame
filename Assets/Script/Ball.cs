@@ -13,15 +13,24 @@ public class Ball : MonoBehaviour
 
     private void Start()
     {
-        myRenderer = GetComponent<MeshRenderer>();
-        myRenderer.material = rarityMaterial[(int)myRarity];
-        myRenderer.material.color = new Color(myRenderer.material.color.r + Random.Range(-colorSample, colorSample), myRenderer.material.color.g + Random.Range(-colorSample, colorSample), myRenderer.material.color.b + Random.Range(-colorSample, colorSample));
-        Instantiate(rarityVFX[(int)myRarity], transform);
+        if (myRarity != BallRarity.None)
+        {
+            myRenderer = GetComponent<MeshRenderer>();
+            myRenderer.material = rarityMaterial[(int)myRarity];
+            myRenderer.material.color = new Color(myRenderer.material.color.r + Random.Range(-colorSample, colorSample), myRenderer.material.color.g + Random.Range(-colorSample, colorSample), myRenderer.material.color.b + Random.Range(-colorSample, colorSample));
+            Instantiate(rarityVFX[(int)myRarity], transform);
+        }
+        
     }
 
     public void OnDestroy()
     {
-        Instantiate(destroyVFX[(int)myRarity], transform.position, Quaternion.identity);
+        if (myRarity != BallRarity.None)
+            Instantiate(destroyVFX[(int)myRarity], transform.position, Quaternion.identity);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
+    }
 }

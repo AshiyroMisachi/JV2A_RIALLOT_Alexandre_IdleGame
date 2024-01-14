@@ -28,16 +28,21 @@ public class ScoreManager : MonoBehaviour
     public Camera cameraPool, cameraMeal;
 
     //Swimming Pool
+    [Header("Swimming Pool")]
     [SerializeField]
     private float scoreBall;
     [SerializeField]
     private int ballNumber = 1;
     private float powerClick = 1, upgradePowerClick = 560, upgradeCostLevel = 50;
     public TextMeshProUGUI powerCostText, upgradeCostLevelText;
-
-    //UI Reference
+    public GameObject shopHolder, buttonGoTo;
     public TextMeshProUGUI showScore;
-    public GameObject shopHolder, buttonGoToMeal;
+
+    //Meal
+    [Header("Meal")]
+    [SerializeField]
+    private float scoreMeal, damage = 1;
+    public TextMeshProUGUI mealCount, ballMunition;
 
     private void Start()
     {
@@ -55,7 +60,7 @@ public class ScoreManager : MonoBehaviour
         allLevel[9] = level10;
         allLevel[10] = level11;
 
-        buttonGoToMeal.SetActive(false);
+        buttonGoTo.SetActive(false);
         cameraMeal.enabled = false;
     }
 
@@ -79,10 +84,22 @@ public class ScoreManager : MonoBehaviour
         return currentLevel;
     }
 
-    public void UpdateScore(float ammout)
+    public float GetDamage()
+    {
+        return damage;
+    }
+
+    public void UpdateScorePool(float ammout)
     {
         scoreBall += ammout;
         showScore.text = Math.Floor(scoreBall).ToString("000000");
+        ballMunition.text = Math.Floor(scoreBall).ToString("000000");
+    }
+    
+    public void UpdateScoreMeal(float ammout)
+    {
+        scoreMeal += ammout;
+        mealCount.text = Math.Floor(scoreMeal).ToString("000000");
     }
 
     //SHOP POOL
@@ -103,7 +120,7 @@ public class ScoreManager : MonoBehaviour
         if (currentLevel < 11 && scoreBall >= upgradeCostLevel)
         {
             currentLevel++;
-            UpdateScore(-upgradeCostLevel);
+            UpdateScorePool(-upgradeCostLevel);
             upgradeCostLevel *= 1.6f;
             if (currentLevel == 11)
             {
@@ -130,7 +147,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (GetScore() >= upgradePowerClick)
         {
-            UpdateScore(-upgradePowerClick);
+            UpdateScorePool(-upgradePowerClick);
             upgradePowerClick *= 2.5f;
             powerCostText.text = Math.Floor(upgradePowerClick).ToString();
             ballNumber++;

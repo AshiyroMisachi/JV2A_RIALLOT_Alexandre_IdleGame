@@ -8,5 +8,6 @@ public enum BallRarity
     Uncommon,
     Rare,
     Epic,
-    Legendary
+    Legendary,
+    None
 }
