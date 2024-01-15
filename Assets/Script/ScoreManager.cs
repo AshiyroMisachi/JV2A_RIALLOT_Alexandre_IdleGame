@@ -35,7 +35,7 @@ public class ScoreManager : MonoBehaviour
     private int ballNumber = 1;
     private float powerClick = 1, upgradePowerClick = 560, upgradeCostLevel = 50;
     public TextMeshProUGUI powerCostText, upgradeCostLevelText;
-    public GameObject shopHolder, buttonGoTo;
+    public GameObject canvasSwiming, shopHolder, buttonGoTo;
     public TextMeshProUGUI showScore;
 
     //Meal
@@ -157,6 +157,7 @@ public class ScoreManager : MonoBehaviour
     public void ChangeMode()
     {
         cameraPool.enabled = !cameraPool.enabled;
+        canvasSwiming.SetActive(cameraPool.enabled);
         cameraMeal.enabled = !cameraMeal.enabled;
     }
 }

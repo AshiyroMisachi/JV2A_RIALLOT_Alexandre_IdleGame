@@ -25,14 +25,14 @@ public class Child : MonoBehaviour
     {
         actualChild = childs[Random.Range(0, childs.Length)];
         childImage.GetComponent<SpriteRenderer>().sprite = actualChild.sprite;
-        childName.text = actualChild.name;
+        childName.text = actualChild.myName;
         hp = actualChild.hp;
         childLifebar.GetComponent<Image>().fillAmount = 1f;
     }
 
     public void OnMouseDown()
     {
-        if (scoreManager.GetScore() > 1)
+        if (scoreManager.GetScore() >= 1)
         {
             //Throw Ball on Child
             Camera myCamera = Camera.main;

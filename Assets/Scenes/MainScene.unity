@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -341,6 +341,7 @@ MonoBehaviour:
   myAnimator: {fileID: 64782952}
   sciptablePools:
   - {fileID: 11400000, guid: 2d792438253d2184cac1b942ccca2515, type: 2}
+  - {fileID: 11400000, guid: 96ed77126f21c3d45a53de1c0c76fa7b, type: 2}
   - {fileID: 11400000, guid: bf3f4071d204fd741b14874ae1012799, type: 2}
   ballNeeded: 10
   ballNumber: 0
@@ -807,7 +808,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 240}
+  m_AnchoredPosition: {x: 0, y: 248}
   m_SizeDelta: {x: 483.2, y: 40.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &176901425
@@ -2996,7 +2997,7 @@ Canvas:
   m_GameObject: {fileID: 859590129}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 963194227}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -3890,6 +3891,7 @@ MonoBehaviour:
   ballNumber: 1
   powerCostText: {fileID: 1014395303}
   upgradeCostLevelText: {fileID: 2098671727}
+  canvasSwiming: {fileID: 859590129}
   shopHolder: {fileID: 586200550}
   buttonGoTo: {fileID: 292631401}
   showScore: {fileID: 1010531963}
@@ -9702,7 +9704,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004851960}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9710,8 +9712,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 34.400024, y: 0}
-  m_SizeDelta: {x: 120, y: 100}
+  m_AnchoredPosition: {x: 33, y: 0}
+  m_SizeDelta: {x: 176.528, y: 122.004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2004851962
 MonoBehaviour:
@@ -9791,7 +9793,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2124e48d83271849b120432a4c3941a, type: 3}
-  m_Name: Lucie
+  m_Name: Child_03
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: c14d270d5084b734da1785bfacc18838, type: 3}
-  hp: 26
-  mealLoot: 7
+  sprite: {fileID: 21300000, guid: bfe1d1c942b33a643b22c9c04c682e02, type: 3}
+  myName: Clara, Defender of a broken biscuit
+  hp: 40
+  mealLoot: 12

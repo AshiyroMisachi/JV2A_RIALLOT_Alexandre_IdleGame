@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2124e48d83271849b120432a4c3941a, type: 3}
-  m_Name: Martine
+  m_Name: Child_07
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 598a41505c12284438e7deb7eef63551, type: 3}
-  hp: 30
-  mealLoot: 6
+  sprite: {fileID: 21300000, guid: 67652d3e15d768344af498092a17341a, type: 3}
+  myName: Theo, The prince of LU
+  hp: 14
+  mealLoot: 3

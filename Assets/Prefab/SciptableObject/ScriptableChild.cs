@@ -6,5 +6,6 @@ using UnityEngine;
 public class ScriptableChild : ScriptableObject
 {
     public Sprite sprite;
+    public string myName;
     public int hp, mealLoot;
 }

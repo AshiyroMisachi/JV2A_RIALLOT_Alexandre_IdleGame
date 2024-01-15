@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2124e48d83271849b120432a4c3941a, type: 3}
-  m_Name: Thimoty
+  m_Name: Child_06
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 4370cf998850b7f47b2e586d490935af, type: 3}
-  hp: 35
-  mealLoot: 8
+  sprite: {fileID: 21300000, guid: 2f08137707e484545b109d01608c6082, type: 3}
+  myName: Samantha, The cookie apocalyspe
+  hp: 25
+  mealLoot: 4
