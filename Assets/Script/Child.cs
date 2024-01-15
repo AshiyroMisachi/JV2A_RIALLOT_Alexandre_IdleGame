@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ public class Child : MonoBehaviour
     public TextMeshProUGUI childName;
     public GameObject childImage, childLifebar;
     public ScriptableChild[] childs;
+    [SerializeField]
+    private List<ScriptableChild> childsActiveList;
     public ScriptableChild actualChild;
     public float hp;
 
@@ -17,13 +20,23 @@ public class Child : MonoBehaviour
 
     void Start()
     {
+        childsActiveList = childs.ToList<ScriptableChild>();
         scoreManager = FindObjectOfType<ScoreManager>();
         AttributeNewValue();
     }
 
     public void AttributeNewValue()
     {
-        actualChild = childs[Random.Range(0, childs.Length)];
+        if (childsActiveList.Count == 0)
+        {
+            childsActiveList = childs.ToList<ScriptableChild>();
+            //Spawn Megazord
+
+            return;
+        }
+        var randomNumber = Random.Range(0, childsActiveList.Count);
+        actualChild = childsActiveList[randomNumber];
+        childsActiveList.RemoveAt(randomNumber);
         childImage.GetComponent<SpriteRenderer>().sprite = actualChild.sprite;
         childName.text = actualChild.myName;
         hp = actualChild.hp;
@@ -36,7 +49,8 @@ public class Child : MonoBehaviour
         {
             //Throw Ball on Child
             Camera myCamera = Camera.main;
-            GameObject newBall = Instantiate(ballPrefab, myCamera.transform.position, Quaternion.identity);
+            var spawnPosition = new Vector3(myCamera.transform.position.x, myCamera.transform.position.y - 1, myCamera.transform.position.z + 2 );
+            GameObject newBall = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
             newBall.GetComponent<Rigidbody>().velocity = Vector3.forward * 10;
             scoreManager.UpdateScorePool(-1);
         }
