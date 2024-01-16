@@ -44,6 +44,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private float scoreMeal, damage = 1;
     public TextMeshProUGUI mealCount, ballMunition;
+    public GameObject canvasMeal;
 
     private void Start()
     {
@@ -61,8 +62,10 @@ public class ScoreManager : MonoBehaviour
         allLevel[9] = level10;
         allLevel[10] = level11;
 
+        //Setup Scene
         buttonGoTo.SetActive(false);
         cameraMeal.enabled = false;
+        canvasMeal.SetActive(false);
     }
 
     public float GetScore()
@@ -160,7 +163,9 @@ public class ScoreManager : MonoBehaviour
         cameraPool.enabled = !cameraPool.enabled;
         canvasSwiming.SetActive(cameraPool.enabled);
         cameraMeal.enabled = !cameraMeal.enabled;
+        canvasMeal.SetActive(cameraMeal.enabled);
 
+        //Move audio to change the music
         audioListener.transform.position = Camera.main.transform.position;
     }
 }
