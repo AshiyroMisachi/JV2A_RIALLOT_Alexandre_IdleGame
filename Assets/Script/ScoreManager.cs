@@ -24,8 +24,9 @@ public class ScoreManager : MonoBehaviour
     public int[] level11;
     public Array[] allLevel;
 
-    //Camera
+    //Object Reference
     public Camera cameraPool, cameraMeal;
+    public GameObject audioListener;
 
     //Swimming Pool
     [Header("Swimming Pool")]
@@ -159,5 +160,7 @@ public class ScoreManager : MonoBehaviour
         cameraPool.enabled = !cameraPool.enabled;
         canvasSwiming.SetActive(cameraPool.enabled);
         cameraMeal.enabled = !cameraMeal.enabled;
+
+        audioListener.transform.position = Camera.main.transform.position;
     }
 }

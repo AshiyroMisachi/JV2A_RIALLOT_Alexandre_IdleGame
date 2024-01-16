@@ -11,12 +11,13 @@ public class Child : MonoBehaviour
     public TextMeshProUGUI childName;
     public GameObject childImage, childLifebar;
     public ScriptableChild[] childs;
-    [SerializeField]
+    public ScriptableChild childBoss;
     private List<ScriptableChild> childsActiveList;
     public ScriptableChild actualChild;
     public float hp;
 
     public GameObject ballPrefab;
+    public GameObject allBall;
 
     void Start()
     {
@@ -27,20 +28,33 @@ public class Child : MonoBehaviour
 
     public void AttributeNewValue()
     {
+        //Clear Ball in air
+        KillAllBall();
+
+        //Boss Child
         if (childsActiveList.Count == 0)
         {
             childsActiveList = childs.ToList<ScriptableChild>();
-            //Spawn Megazord
-
-            return;
+            actualChild = childBoss;
+            childImage.transform.localPosition = new Vector3(0, 0, 22);
         }
-        var randomNumber = Random.Range(0, childsActiveList.Count);
-        actualChild = childsActiveList[randomNumber];
-        childsActiveList.RemoveAt(randomNumber);
+        //Basic Child
+        else
+        {
+            var randomNumber = Random.Range(0, childsActiveList.Count);
+            actualChild = childsActiveList[randomNumber];
+            childsActiveList.RemoveAt(randomNumber);
+            childImage.transform.localPosition = new Vector3(0, 0, 15);
+        }
+        //Apply new value
         childImage.GetComponent<SpriteRenderer>().sprite = actualChild.sprite;
         childName.text = actualChild.myName;
         hp = actualChild.hp;
         childLifebar.GetComponent<Image>().fillAmount = 1f;
+
+        //Resize Box Collider
+        Destroy(childImage.GetComponent<BoxCollider>());
+        childImage.AddComponent<BoxCollider>();
     }
 
     public void OnMouseDown()
@@ -49,8 +63,9 @@ public class Child : MonoBehaviour
         {
             //Throw Ball on Child
             Camera myCamera = Camera.main;
-            var spawnPosition = new Vector3(myCamera.transform.position.x, myCamera.transform.position.y - 1, myCamera.transform.position.z + 2 );
-            GameObject newBall = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
+            var spawnPosition = new Vector3(myCamera.transform.position.x, myCamera.transform.position.y - 1, myCamera.transform.position.z + 2);
+            GameObject newBall = Instantiate(ballPrefab, allBall.transform);
+            newBall.transform.position = spawnPosition;
             newBall.GetComponent<Rigidbody>().velocity = Vector3.forward * 10;
             scoreManager.UpdateScorePool(-1);
         }
@@ -69,7 +84,7 @@ public class Child : MonoBehaviour
     public IEnumerator loseHp(float damage)
     {
         hp -= damage;
-        childLifebar.GetComponent<Image>().fillAmount = hp/actualChild.hp;
+        childLifebar.GetComponent<Image>().fillAmount = hp / actualChild.hp;
         childImage.GetComponent<SpriteRenderer>().color = Color.red;
         if (hp <= 0)
         {
@@ -78,5 +93,18 @@ public class Child : MonoBehaviour
         }
         yield return new WaitForSeconds(0.2f);
         childImage.GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    public void KillAllBall()
+    {
+        if (allBall.transform.childCount > 0)
+        {
+            for (int i = 0; i < allBall.transform.childCount; i++)
+            {
+                Destroy(allBall.transform.GetChild(i).gameObject);
+                //Refund Ball who got destroy
+                scoreManager.UpdateScorePool(1);
+            }
+        }
     }
 }
