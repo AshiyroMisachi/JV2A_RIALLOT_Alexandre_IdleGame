@@ -18,6 +18,7 @@ public class Child : MonoBehaviour
 
     public GameObject ballPrefab;
     public GameObject allBall;
+    public GameObject cameraMeal;
 
     void Start()
     {
@@ -59,16 +60,20 @@ public class Child : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (scoreManager.GetScore() >= 1)
+        if (scoreManager.GetScorePool() >= 1)
         {
-            //Throw Ball on Child
-            Camera myCamera = Camera.main;
-            var spawnPosition = new Vector3(myCamera.transform.position.x, myCamera.transform.position.y - 1, myCamera.transform.position.z + 2);
-            GameObject newBall = Instantiate(ballPrefab, allBall.transform);
-            newBall.transform.position = spawnPosition;
-            newBall.GetComponent<Rigidbody>().velocity = Vector3.forward * 10;
+            ThrowBall();
             scoreManager.UpdateScorePool(-1);
         }
+    }
+
+    public void ThrowBall()
+    {
+        //Throw Ball on Child
+        var spawnPosition = new Vector3(cameraMeal.transform.position.x, cameraMeal.transform.position.y - 1, cameraMeal.transform.position.z + 2);
+        GameObject newBall = Instantiate(ballPrefab, allBall.transform);
+        newBall.transform.position = spawnPosition;
+        newBall.GetComponent<Rigidbody>().velocity = Vector3.forward * 10;
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -76,7 +81,7 @@ public class Child : MonoBehaviour
         Ball ball = collision.gameObject.GetComponent<Ball>();
         if (ball != null)
         {
-            StartCoroutine(loseHp(scoreManager.GetDamage()));
+            StartCoroutine(loseHp(scoreManager.GetBallWeight()));
             Destroy(ball.gameObject);
         }
     }

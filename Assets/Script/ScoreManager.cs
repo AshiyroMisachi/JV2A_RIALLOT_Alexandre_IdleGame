@@ -36,15 +36,15 @@ public class ScoreManager : MonoBehaviour
     private int ballNumber = 1;
     private float powerClick = 1, upgradePowerClick = 560, upgradeCostLevel = 50;
     public TextMeshProUGUI powerCostText, upgradeCostLevelText;
-    public GameObject canvasSwiming, shopHolder, buttonGoTo;
+    public GameObject canvasSwiming, shopHolderPool, buttonGoTo;
     public TextMeshProUGUI showScore;
 
     //Meal
     [Header("Meal")]
     [SerializeField]
-    private float scoreMeal, damage = 1;
-    public TextMeshProUGUI mealCount, ballMunition;
-    public GameObject canvasMeal;
+    private float scoreMeal, ballWeight = 1, upgradeBallWeight = 10;
+    public TextMeshProUGUI mealCount, ballMunition, ballWeightCostText;
+    public GameObject canvasMeal, shopHolderMeal, childImage;
 
     private void Start()
     {
@@ -66,9 +66,11 @@ public class ScoreManager : MonoBehaviour
         buttonGoTo.SetActive(false);
         cameraMeal.enabled = false;
         canvasMeal.SetActive(false);
+        shopHolderMeal.SetActive(false);    
+        shopHolderPool.SetActive(false);
     }
 
-    public float GetScore()
+    public float GetScorePool()
     {
         return scoreBall;
     }
@@ -88,9 +90,14 @@ public class ScoreManager : MonoBehaviour
         return currentLevel;
     }
 
-    public float GetDamage()
+    public float GetScoreMeal()
     {
-        return damage;
+        return scoreMeal;
+    }
+
+    public float GetBallWeight()
+    {
+        return ballWeight;
     }
 
     public void UpdateScorePool(float ammout)
@@ -109,14 +116,7 @@ public class ScoreManager : MonoBehaviour
     //SHOP POOL
     public void OpenShopPool()
     {
-        if (shopHolder.activeSelf)
-        {
-            shopHolder.SetActive(false);
-        }
-        else
-        {
-            shopHolder.SetActive(true);
-        }
+        shopHolderPool.SetActive(!shopHolderPool.activeSelf);
     }
 
     public void UpgradeLevelPool()
@@ -149,7 +149,7 @@ public class ScoreManager : MonoBehaviour
 
     public void UpgradePowerPool()
     {
-        if (GetScore() >= upgradePowerClick)
+        if (GetScorePool() >= upgradePowerClick)
         {
             UpdateScorePool(-upgradePowerClick);
             upgradePowerClick *= 2.5f;
@@ -167,5 +167,24 @@ public class ScoreManager : MonoBehaviour
 
         //Move audio to change the music
         audioListener.transform.position = Camera.main.transform.position;
+    }
+
+    //Shop Meal
+    public void OpenShopMeal()
+    {
+        shopHolderMeal.SetActive(!shopHolderMeal.activeSelf);
+        childImage.SetActive(!shopHolderMeal.activeSelf);
+        childImage.GetComponent<Child>().KillAllBall();
+    }
+
+    public void UpgradeBallWeight()
+    {
+        if (scoreMeal >= upgradeBallWeight)
+        {
+            UpdateScoreMeal(-upgradeBallWeight);
+            ballWeight++;
+            upgradeBallWeight *= 1.4f;
+            ballWeightCostText.text = Math.Floor(upgradeBallWeight).ToString();
+        }
     }
 }
