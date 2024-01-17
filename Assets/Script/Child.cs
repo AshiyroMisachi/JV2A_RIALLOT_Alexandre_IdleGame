@@ -60,7 +60,7 @@ public class Child : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (scoreManager.GetScorePool() >= 1)
+        if (scoreManager.GetScorePool() >= 1 && !scoreManager.shopHolderMeal.activeSelf)
         {
             ThrowBall();
             scoreManager.UpdateScorePool(-1);

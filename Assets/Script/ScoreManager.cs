@@ -173,8 +173,8 @@ public class ScoreManager : MonoBehaviour
     public void OpenShopMeal()
     {
         shopHolderMeal.SetActive(!shopHolderMeal.activeSelf);
-        childImage.SetActive(!shopHolderMeal.activeSelf);
-        childImage.GetComponent<Child>().KillAllBall();
+        //childImage.SetActive(!shopHolderMeal.activeSelf);
+        //childImage.GetComponent<Child>().KillAllBall();
     }
 
     public void UpgradeBallWeight()

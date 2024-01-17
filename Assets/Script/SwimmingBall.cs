@@ -46,7 +46,8 @@ public class SwimmingBall : MonoBehaviour
 
     public void OnMouseDown()
     {
-        GenerateBall();
+        if (!scoreManager.shopHolderPool.activeSelf)
+            GenerateBall();
     }
     public void GenerateBall()
     {

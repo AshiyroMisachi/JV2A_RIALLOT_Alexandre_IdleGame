@@ -11,7 +11,9 @@ public class AutoClicker : MonoBehaviour
 
     //VAR Pool
     [SerializeField]
-    private float timerBetweenClick = 1, powerClick = 0, upgradePowerClick = 20;
+    private float timerBetweenClick = 2, upgradePowerClick = 20;
+    private bool autoClick = false;
+    public SwimmingBall pool;
 
     //Shop UI Meal
     public TextMeshProUGUI powerCostText;
@@ -40,20 +42,32 @@ public class AutoClicker : MonoBehaviour
     {
         while (true)
         {
-            scoreManager.UpdateScorePool(powerClick);
+            if (autoClick)
+            {
+                pool.GenerateBall();
+            }
             yield return new WaitForSeconds(timerBetweenClick);
         }
     }
 
     public void UpgradePower()
     {
-        if (scoreManager.GetScorePool() >= upgradePowerClick)
+        if (scoreManager.GetScorePool() >= upgradePowerClick && timerBetweenClick > 0.1f)
         {
             scoreManager.UpdateScorePool(-upgradePowerClick);
             upgradePowerClick *= 1.2f;
             powerCostText.text = Math.Floor(upgradePowerClick).ToString();
-            powerClick++;
+            if (!autoClick)
+            {
+                autoClick =  true;
+                return;
+            }
+            timerBetweenClick -= 0.1f;
             UpdateEmission();
+            if (timerBetweenClick == 0.1f)
+            {
+                powerCostText.text = "MAX";
+            }
         }
     }
 
@@ -61,7 +75,7 @@ public class AutoClicker : MonoBehaviour
     {
         var myParticleEmission = myParticle.emission;
         myParticleEmission.enabled = true;
-        myParticleEmission.rateOverTime = powerClick / timerBetweenClick;
+        myParticleEmission.rateOverTime = scoreManager.GetBallNumber() / timerBetweenClick;
     }
 
     //MEAL
@@ -81,21 +95,20 @@ public class AutoClicker : MonoBehaviour
 
     public void UpgradeAutoThrow()
     {
-        if (scoreManager.GetScoreMeal() >= upgradeAutoThrow && timerBetweenClick > 0)
+        if (scoreManager.GetScoreMeal() >= upgradeAutoThrow && timerBetweenThrow > 0.1f)
         {
             scoreManager.UpdateScoreMeal(-upgradeAutoThrow);
             upgradeAutoThrow *= 1.6f;
             autoThrowCostText.text = Math.Floor(upgradeAutoThrow).ToString();
             if (!autoThrow)
             {
-                autoThrow= true;
+                autoThrow = true;
                 return;
             }
-            timerBetweenClick -= 0.1f;
-            if (timerBetweenClick == 0)
+            timerBetweenThrow -= 0.1f;
+            if (timerBetweenClick == 0.1f)
             {
                 autoThrowCostText.text = "MAX";
-                return;
             }
         }
     }
