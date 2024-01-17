@@ -42,7 +42,8 @@ public class ScoreManager : MonoBehaviour
     //Meal
     [Header("Meal")]
     [SerializeField]
-    private float scoreMeal, ballWeight = 1, upgradeBallWeight = 10;
+    private float scoreMeal;
+    private float ballWeight = 1, upgradeBallWeight = 10;
     public TextMeshProUGUI mealCount, ballMunition, ballWeightCostText;
     public GameObject canvasMeal, shopHolderMeal, childImage;
 

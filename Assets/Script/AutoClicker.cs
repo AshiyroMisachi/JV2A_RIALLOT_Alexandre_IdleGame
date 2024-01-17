@@ -64,7 +64,7 @@ public class AutoClicker : MonoBehaviour
             }
             timerBetweenClick -= 0.1f;
             UpdateEmission();
-            if (timerBetweenClick == 0.1f)
+            if (timerBetweenClick <= 0.1f)
             {
                 powerCostText.text = "MAX";
             }
@@ -106,7 +106,7 @@ public class AutoClicker : MonoBehaviour
                 return;
             }
             timerBetweenThrow -= 0.1f;
-            if (timerBetweenClick == 0.1f)
+            if (timerBetweenClick <= 0.1f)
             {
                 autoThrowCostText.text = "MAX";
             }
