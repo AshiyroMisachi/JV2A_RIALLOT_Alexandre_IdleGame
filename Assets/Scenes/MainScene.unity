@@ -335,10 +335,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 0}
-  ballShelf: {fileID: 0}
   ballPrefab: {fileID: 1402171491646464096, guid: 9f45a0d13833a3f43858790dd6ff8a2d, type: 3}
   allBall: {fileID: 1413118381}
-  myAnimator: {fileID: 64782952}
   sciptablePools:
   - {fileID: 11400000, guid: 2d792438253d2184cac1b942ccca2515, type: 2}
   - {fileID: 11400000, guid: 96ed77126f21c3d45a53de1c0c76fa7b, type: 2}
@@ -10765,9 +10763,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 0}
   timerBetweenClick: 2
-  upgradePowerClick: 20
   pool: {fileID: 64782956}
   powerCostText: {fileID: 442248468}
+  timerBetweenThrow: 2
   childImage: {fileID: 77053431}
   autoThrowCostText: {fileID: 663594197}
   myParticle: {fileID: 0}
