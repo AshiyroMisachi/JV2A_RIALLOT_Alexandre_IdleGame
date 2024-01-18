@@ -11,7 +11,8 @@ public class AutoClicker : MonoBehaviour
 
     //VAR Pool
     [SerializeField]
-    private float timerBetweenClick = 2, upgradePowerClick = 20;
+    private float timerBetweenClick = 2;
+    private float upgradePowerClick = 20;
     private bool autoClick = false;
     public SwimmingBall pool;
 
@@ -19,7 +20,9 @@ public class AutoClicker : MonoBehaviour
     public TextMeshProUGUI powerCostText;
 
     //VAR Meal
-    private float timerBetweenThrow = 2, upgradeAutoThrow = 15;
+    [SerializeField]
+    private float timerBetweenThrow = 2;
+    private float upgradeAutoThrow = 15;
     private bool autoThrow = false;
     public Child childImage;
     public TextMeshProUGUI autoThrowCostText;
@@ -84,10 +87,9 @@ public class AutoClicker : MonoBehaviour
     {
         while (true)
         {
-            if (autoThrow && childImage.gameObject.activeSelf)
+            if (autoThrow)
             {
                 childImage.ThrowBall();
-                scoreManager.UpdateScorePool(-1);
             }
             yield return new WaitForSeconds(timerBetweenThrow);
         }

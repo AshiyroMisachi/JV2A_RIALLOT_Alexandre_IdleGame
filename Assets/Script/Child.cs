@@ -63,7 +63,6 @@ public class Child : MonoBehaviour
         if (scoreManager.GetScorePool() >= 1 && !scoreManager.shopHolderMeal.activeSelf)
         {
             ThrowBall();
-            scoreManager.UpdateScorePool(-1);
         }
     }
 
@@ -74,6 +73,7 @@ public class Child : MonoBehaviour
         GameObject newBall = Instantiate(ballPrefab, allBall.transform);
         newBall.transform.position = spawnPosition;
         newBall.GetComponent<Rigidbody>().velocity = Vector3.forward * 10;
+        scoreManager.UpdateScorePool(-1);
     }
 
     public void OnCollisionEnter(Collision collision)

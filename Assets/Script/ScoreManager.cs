@@ -122,19 +122,22 @@ public class ScoreManager : MonoBehaviour
 
     public void UpgradeLevelPool()
     {
+        //Check if the level is not maxed already
         if (currentLevel < 11 && scoreBall >= upgradeCostLevel)
         {
             currentLevel++;
             UpdateScorePool(-upgradeCostLevel);
-            upgradeCostLevel *= 1.6f;
+
+            //If the level is maxed don't show cost anymore
             if (currentLevel == 11)
             {
                 upgradeCostLevelText.text = "Maxed";
+                return;
             }
-            else
-            {
-                upgradeCostLevelText.text = Math.Floor(upgradeCostLevel).ToString();
-            }
+            upgradeCostLevel *= 1.6f;
+            upgradeCostLevelText.text = Math.Floor(upgradeCostLevel).ToString();
+
+            //Update value of % rarity
             int[] currentChance = (int[])allLevel[currentLevel - 1];
             showCommon.text = (0 + currentChance[0]) + "%";
             if (currentChance[1] > 0)
@@ -174,8 +177,6 @@ public class ScoreManager : MonoBehaviour
     public void OpenShopMeal()
     {
         shopHolderMeal.SetActive(!shopHolderMeal.activeSelf);
-        //childImage.SetActive(!shopHolderMeal.activeSelf);
-        //childImage.GetComponent<Child>().KillAllBall();
     }
 
     public void UpgradeBallWeight()
